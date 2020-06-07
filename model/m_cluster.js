@@ -11,7 +11,7 @@ var Cluster = {
         let section = pathname[1];
 
         //sql
-        let sql =  `SELECT ct_id, ct_sequence, ct_name_th, ct_name_en, ct_img, ct_color_code, sys_id, sys_name_th, sys_name_en
+        let sql = `SELECT ct_id, ct_sequence, ct_name_th, ct_name_en, ct_img, ct_color_code, sys_id, sys_name_th, sys_name_en
                     FROM vt_cluster
                     LEFT JOIN vt_system_matching ON sm_ct_id = ct_id
                     LEFT JOIN vt_systems ON sm_sys_id = sys_id
@@ -21,25 +21,25 @@ var Cluster = {
         console.log(`call: get_all`);
 
         //query the DB using prepared statement
-        var results = db.query(sql, function(err, results, fields){
+        var results = db.query(sql, function(err, results, fields) {
             //if error, print blank results
             if (err) {
                 // console.log(err);
                 var apiResult = {};
-                
+
                 apiResult.meta = {
-                    table: section,
-                    type: "collection",
-                    total: 0
-                }
-                //create an empty data table
+                        table: section,
+                        type: "collection",
+                        total: 0
+                    }
+                    //create an empty data table
                 apiResult.data = [];
-                
+
                 //send the results (apiResult) as JSON to Express (res)
                 //Express uses res.json() to send JSON to client
                 //you will see res.send() used for HTML
                 res.json(apiResult);
-                
+
             }
 
             //make results 
@@ -71,9 +71,13 @@ var Cluster = {
         let section = pathname[1];
 
         //sql
-        let sql =  `SELECT ct_id, ct_sequence, ct_name_th, ct_name_en, ct_img, ct_color_code, sys_id, sys_name_th, sys_name_en,
+        let sql = `SELECT ct_id, ct_sequence, ct_name_th, ct_name_en, ct_img, ct_color_code, sys_id, sys_name_th, sys_name_en,
                     (
-                        SELECT (sc_money + IFNULL((SUM(se_values) ), 0)) AS total_money
+                        SELECT (
+                                sc_money + IFNULL(
+                                                    (SUM(se_values) ), 0
+                                                )
+                                ) AS total_money
                         FROM vt_score
                         LEFT JOIN vt_cluster ON sc_ct_id = ct_id
                         LEFT JOIN scrum_logs ON sl_ct_id = ct_id
@@ -90,25 +94,25 @@ var Cluster = {
         console.log(`call: get_all`);
 
         //query the DB using prepared statement
-        var results = db.query(sql, function(err, results, fields){
+        var results = db.query(sql, function(err, results, fields) {
             //if error, print blank results
             if (err) {
                 // console.log(err);
                 var apiResult = {};
-                
+
                 apiResult.meta = {
-                    table: section,
-                    type: "collection",
-                    total: 0
-                }
-                //create an empty data table
+                        table: section,
+                        type: "collection",
+                        total: 0
+                    }
+                    //create an empty data table
                 apiResult.data = [];
-                
+
                 //send the results (apiResult) as JSON to Express (res)
                 //Express uses res.json() to send JSON to client
                 //you will see res.send() used for HTML
                 res.json(apiResult);
-                
+
             }
 
             //make results 
@@ -140,7 +144,7 @@ var Cluster = {
         let section = pathname[1];
 
         //sql
-        let sql =  `SELECT ct_id, ct_sequence, ct_name_th, ct_name_en, ct_img, ct_color_code, sys_id, sys_name_th, sys_name_en,
+        let sql = `SELECT ct_id, ct_sequence, ct_name_th, ct_name_en, ct_img, ct_color_code, sys_id, sys_name_th, sys_name_en,
                     (
                         SELECT (sc_money + IFNULL((SUM(se_values) ), 0)) AS total_money
                         FROM vt_score
@@ -159,25 +163,25 @@ var Cluster = {
         console.log(`call: get_all`);
 
         //query the DB using prepared statement
-        var results = db.query(sql, function(err, results, fields){
+        var results = db.query(sql, function(err, results, fields) {
             //if error, print blank results
             if (err) {
                 // console.log(err);
                 var apiResult = {};
-                
+
                 apiResult.meta = {
-                    table: section,
-                    type: "collection",
-                    total: 0
-                }
-                //create an empty data table
+                        table: section,
+                        type: "collection",
+                        total: 0
+                    }
+                    //create an empty data table
                 apiResult.data = [];
-                
+
                 //send the results (apiResult) as JSON to Express (res)
                 //Express uses res.json() to send JSON to client
                 //you will see res.send() used for HTML
                 res.json(apiResult);
-                
+
             }
 
             //make results 
