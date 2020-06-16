@@ -27,18 +27,18 @@ var Users = {
         console.log(`Users -> call: get_all`);
 
         //query the DB using prepared statement
-        var results = db.query(sql, function (err, results, fields) {
+        var results = db.query(sql, function(err, results, fields) {
             //if error, print blank results
             if (err) {
                 // console.log(err);
                 var apiResult = {};
 
                 apiResult.meta = {
-                    table: section,
-                    type: "collection",
-                    total: 0
-                }
-                //create an empty data table
+                        table: section,
+                        type: "collection",
+                        total: 0
+                    }
+                    //create an empty data table
                 apiResult.data = [];
 
                 //send the results (apiResult) as JSON to Express (res)
@@ -70,7 +70,7 @@ var Users = {
         })
 
     },
-    check_login: async (req, res) => {
+    check_login: async(req, res) => {
 
         //grab the site section from the req variable (/strains/)
         let pathname = req._parsedUrl.pathname.split('/');
@@ -78,7 +78,7 @@ var Users = {
         let section = pathname[1];
 
         //sql
-        let sql = `SELECT us_id, ut_name_th, ut_name_en, IF(COUNT(us_id) = 1,'true','false') AS canLogin
+        let sql = `SELECT us_id, ut_name_th, ut_name_en, IF(COUNT(us_id) = 1,'true','false') AS can_login
             FROM vt_users
             LEFT JOIN vt_user_type ON ut_id = us_ut_id
             WHERE us_username = ? AND us_password = ?`;
@@ -90,7 +90,7 @@ var Users = {
         console.log(`Users -> call: check_login [us_username = ${us_username}]`);
 
         //query the DB using prepared statement
-        var results = db.query(sql, data, function (err, results, fields) {
+        var results = db.query(sql, data, function(err, results, fields) {
             //if error, print blank results
             if (err) {
                 console.log(err);
@@ -137,7 +137,7 @@ var Users = {
         console.log(`Users -> call: get_logs [us_id = ${us_id}]`);
 
         //query the DB using prepared statement
-        var results = db.query(sql, data, function (err, results, fields) {
+        var results = db.query(sql, data, function(err, results, fields) {
             //if error, print blank results
             if (err) {
                 console.log(err);
